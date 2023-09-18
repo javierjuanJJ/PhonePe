@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PhonePe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phonepe">PhonePe</string>
+    <string name="itemMenuHome">Home</string>
+    <string name="itemMenuOffers">Offers</string>
+    <string name="itemMenuPayments"><![CDATA[Scan & pay]]></string>
+    <string name="itemMenuAccount">My account</string>
+    <string name="itemMenuTransactions">Transactions</string>
 </resources>
