@@ -1,11 +1,11 @@
 package com.example.phonepe.model;
 
-class TransactionModel {
+public class TransactionModel {
 
     private String txnDate, txnMed, txnDealer, txnAmt, txnAntCd;
     private int imgTxnWay;
 
-    public TransactionModel(String txnDate, String txnMed, String txnDealer, String txnAmt, String txnAntCd, int imgTxnWay) {
+    public TransactionModel(int txnDate, String txnMed, String txnDealer, String txnAmt, String txnAntCd, String imgTxnWay) {
         this.txnDate = txnDate;
         this.txnMed = txnMed;
         this.txnDealer = txnDealer;

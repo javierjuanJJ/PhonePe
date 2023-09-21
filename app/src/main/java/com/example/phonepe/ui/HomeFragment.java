@@ -19,6 +19,7 @@ import com.example.phonepe.adapter.HomeViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +64,39 @@ public class HomeFragment extends Fragment {
         initViews(view);
         setupViewPager();
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                addBottomDots(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        timer = new Timer();
+        timer.schedule(
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        getActivity().runOnUiThread(() -> {
+                            if (count <= 5) {
+                                count++;
+                            } else {
+                                count = 0;
+                            }
+                            viewPager.setCurrentItem(count);
+                        });
+                    }
+                }, 500, 2000
+        );
 
         // Inflate the layout for this fragment
         return view;
@@ -84,7 +118,22 @@ public class HomeFragment extends Fragment {
         for (int counter = 0; counter < mTxtDot.length; counter++) {
             mTxtDot[counter] = new TextView(context);
             mTxtDot[counter].setText(Html.fromHtml("&#8226;"));
+            mTxtDot[counter].setTextSize(35.0F);
+            mTxtDot[counter].setTextColor(getResources().getColor(R.color.green_300));
+            lnrLyt.addView(mTxtDot[counter]);
         }
 
+        if (mTxtDot.length > 0) {
+            mTxtDot[currentPage].setTextColor(getResources().getColor(R.color.green_400));
+        }
+
+
+    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        timer.cancel();
     }
 }

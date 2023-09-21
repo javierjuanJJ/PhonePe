@@ -1,33 +1,37 @@
 package com.example.phonepe.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.phonepe.R;
+import com.example.phonepe.adapter.TransactionAdapter;
+import com.example.phonepe.model.TransactionModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TransactionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class TransactionFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Context context;
+    private RecyclerView recyclerView;
 
     public TransactionFragment() {
         // Required empty public constructor
+    }
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     /**
@@ -42,8 +46,6 @@ public class TransactionFragment extends Fragment {
     public static TransactionFragment newInstance(String param1, String param2) {
         TransactionFragment fragment = new TransactionFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,8 +54,7 @@ public class TransactionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -61,6 +62,32 @@ public class TransactionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transaction, container, false);
+        View view = inflater.inflate(R.layout.fragment_transaction, container, false);
+        initViews(view);
+        ArrayList<TransactionModel> transactionModels = new ArrayList<TransactionModel>();
+        transactionModels.add(new TransactionModel(R.drawable.ic_to_contact, "1 day ago", "Paid to", "Zomato", "Rs." + "500", "Debbotded from"));
+        transactionModels.add(new TransactionModel(R.drawable.ic_to_contact, "1 day ago", "Paid to", "FlipKart", "Rs." + "200", "Debbotded from"));
+        transactionModels.add(new TransactionModel(R.drawable.ic_to_account, "2 day ago", "CashBack", "Pizzahut", "Rs." + "190", "Debbotded to"));
+        transactionModels.add(new TransactionModel(R.drawable.ic_to_contact, "3 day ago", "Paid to", "BigBazzar", "Rs." + "1170", "Creddited from"));
+
+
+        transactionModels.add(new TransactionModel(R.drawable.ic_to_contact, "4 day ago", "Paid to", "Crompton", "Rs." + "700", "Debbotded from"));
+        transactionModels.add(new TransactionModel(R.drawable.ic_to_account, "5 day ago", "Paid to", "AJIO", "Rs." + "900", "Debbotded to"));
+        transactionModels.add(new TransactionModel(R.drawable.ic_to_account, "7 day ago", "CashBack", "Myntra", "Rs." + "190", "Credited from"));
+
+
+        TransactionAdapter adapter = new TransactionAdapter(context, transactionModels);
+
+        recyclerView.setAdapter(adapter);
+        return view;
+    }
+
+    private void initViews(View view) {
+
+
+        recyclerView = view.findViewById(R.id.transaction_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+
     }
 }
