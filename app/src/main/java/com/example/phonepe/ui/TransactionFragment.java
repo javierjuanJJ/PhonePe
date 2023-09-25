@@ -76,7 +76,7 @@ public class TransactionFragment extends Fragment {
         transactionModels.add(new TransactionModel(R.drawable.ic_to_account, "7 day ago", "CashBack", "Myntra", "Rs." + "190", "Credited from"));
 
 
-        TransactionAdapter adapter = new TransactionAdapter(context, transactionModels);
+        TransactionAdapter adapter = new TransactionAdapter(transactionModels, context);
 
         recyclerView.setAdapter(adapter);
         return view;
