@@ -39,7 +39,7 @@ public class AccountFragment extends Fragment {
      * @return A new instance of fragment AccountFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
+    public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);

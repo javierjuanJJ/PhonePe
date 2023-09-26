@@ -43,7 +43,7 @@ public class TransactionFragment extends Fragment {
      * @return A new instance of fragment TransactionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TransactionFragment newInstance(String param1, String param2) {
+    public static TransactionFragment newInstance() {
         TransactionFragment fragment = new TransactionFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
