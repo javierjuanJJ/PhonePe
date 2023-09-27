@@ -1,6 +1,6 @@
 package com.example.phonepe.model;
 
-class DealerModel {
+public class DealerModel {
 
    private String dealerName, discountOffer, discountAmt, discountWay, discountDetail;
 

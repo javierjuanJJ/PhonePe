@@ -13,7 +13,7 @@ import com.example.phonepe.R;
 
 import java.util.ArrayList;
 
-class OfferViewPagerAdapter extends PagerAdapter {
+public class OfferViewPagerAdapter extends PagerAdapter {
    private Context context;
    private ArrayList<String> offerList;
 
@@ -27,7 +27,7 @@ class OfferViewPagerAdapter extends PagerAdapter {
    public Object instantiateItem(@NonNull ViewGroup container, int position) {
       View view = LayoutInflater.from(context).inflate(R.layout.offer_viewpager_item, container, false);
 
-      TextView txtOffer = view.findViewById(R.id.);
+      TextView txtOffer = view.findViewById(R.id.offerGame);
       txtOffer.setText(offerList.get(position));
       container.addView(view);
       return view;

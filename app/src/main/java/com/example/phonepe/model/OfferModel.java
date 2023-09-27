@@ -1,6 +1,6 @@
 package com.example.phonepe.model;
 
-class OfferModel {
+public class OfferModel {
 
     private  String offerOn, offerDetails;
     private int image;

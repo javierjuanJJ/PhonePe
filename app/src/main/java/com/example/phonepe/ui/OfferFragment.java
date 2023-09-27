@@ -12,13 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.phonepe.R;
 import com.example.phonepe.adapter.DealerAdapter;
+import com.example.phonepe.adapter.OfferViewPagerAdapter;
+import com.example.phonepe.model.DealerModel;
+import com.example.phonepe.model.OfferModel;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -69,7 +74,56 @@ public class OfferFragment extends Fragment {
         initViews(view);
 
         setUpViewPager();
+        ArrayList<DealerModel> offlineMerchantList = new ArrayList<DealerModel>();
+        offlineMerchantList.add(new DealerModel(
+           "StarsBuck","Flat",
+                "Rs."+"39","Gree","Valid Onece pre User"
+        ));
 
+        offlineMerchantList.add(new DealerModel(
+                "StarsBuck","Flat",
+                "Rs."+"39","Gree","Valid Onece pre User"
+        ));
+
+        offlineMerchantList.add(new DealerModel(
+                "StarsBuck","Flat",
+                "Rs."+"39","Gree","Valid Onece pre User"
+        ));
+
+        adapter = new DealerAdapter(context, offlineMerchantList);
+        dealersRecycler.setAdapter(adapter);
+
+        ArrayList<DealerModel> onlineDealerList = new ArrayList<>();
+        onlineDealerList.add(new DealerModel(
+                "Zomato","Get",
+                "20%","Cashback",
+                "Valid Twice per User"
+        ));
+
+        onlineDealerList.add(new DealerModel(
+                "Zomato","Get",
+                "20%","Cashback",
+                "Valid Twice per User"
+        ));
+
+        onlineDealerList.add(new DealerModel(
+                "Zomato","Get",
+                "20%","Cashback",
+                "Valid Twice per User"
+        ));
+
+        adapter = new DealerAdapter(context, offlineMerchantList);
+        dealersRecyclerOnline.setAdapter(adapter);
+
+        ArrayList<OfferModel> offerList = new ArrayList<OfferModel>();
+        offerList.add(new OfferModel(R.drawable.ic_bill_green,
+                "Bill Payment", "25% CashBack"));
+
+        offerList.add(new OfferModel(R.drawable.ic_bill_green,
+                "Bill Payment", "25% CashBack"));
+
+        offerList.add(new OfferModel(R.drawable.ic_bill_green,
+                "Bill Payment", "25% CashBack"));
 
         return view;
     }
@@ -81,6 +135,28 @@ public class OfferFragment extends Fragment {
         offerList.add("20 % off on $BI card");
         offerList.add("10% discount Book Flight");
         offerList.add("20 % off on $BI card");
+        OfferViewPagerAdapter viewPagerAdapter = new OfferViewPagerAdapter(context, offerList);
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setClipToPadding(false);
+        viewPager.setPadding(40,0,40,20);
+        viewPager.setPageMargin(20);
+        addBottomDots(count);
+    }
+
+    private void addBottomDots(int currentPage) {
+        TextView[] mTxtDot = new TextView[offerList.size()];
+
+        for (int counter = 0; counter < mTxtDot.length; counter++) {
+            mTxtDot[counter] = new TextView(context);
+            mTxtDot[counter].setText(Html.fromHtml("&#8226;"));
+            mTxtDot[counter].setTextSize(35.0F);
+            mTxtDot[counter].setTextColor(getResources().getColor(R.color.green_300));
+            lnrLyt.addView(mTxtDot[counter]);
+        }
+
+        if (mTxtDot.length > 0) {
+            mTxtDot[currentPage].setTextColor(getResources().getColor(R.color.green_400));
+        }
     }
 
     private void initViews(View view) {
@@ -97,5 +173,11 @@ public class OfferFragment extends Fragment {
 
         dealersRecycler.setLayoutManager(new GridLayoutManager(context, 3));
         dealersRecyclerOnline.setLayoutManager(new GridLayoutManager(context, 3));
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        timer.cancel();
     }
 }
