@@ -21,12 +21,14 @@ import android.widget.TextView;
 
 import com.example.phonepe.R;
 import com.example.phonepe.adapter.DealerAdapter;
+import com.example.phonepe.adapter.OfferAdapter;
 import com.example.phonepe.adapter.OfferViewPagerAdapter;
 import com.example.phonepe.model.DealerModel;
 import com.example.phonepe.model.OfferModel;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class OfferFragment extends Fragment {
 
@@ -115,15 +117,68 @@ public class OfferFragment extends Fragment {
         adapter = new DealerAdapter(context, offlineMerchantList);
         dealersRecyclerOnline.setAdapter(adapter);
 
+        ArrayList<OfferModel> offerListOnline = new ArrayList<OfferModel>();
+        offerListOnline.add(new OfferModel(
+                "Bill Payment", "25% CashBack",R.drawable.ic_bill_green));
+        offerListOnline.add(new OfferModel(
+                "Bill Payment", "25% CashBack",R.drawable.ic_bill_green));
+        offerListOnline.add(new OfferModel(
+                "Bill Payment", "25% CashBack",R.drawable.ic_bill_green));
+
+
+
         ArrayList<OfferModel> offerList = new ArrayList<OfferModel>();
-        offerList.add(new OfferModel(R.drawable.ic_bill_green,
-                "Bill Payment", "25% CashBack"));
 
-        offerList.add(new OfferModel(R.drawable.ic_bill_green,
-                "Bill Payment", "25% CashBack"));
 
-        offerList.add(new OfferModel(R.drawable.ic_bill_green,
-                "Bill Payment", "25% CashBack"));
+        offerListOnline.add(new OfferModel(
+                "Bill Payment", "25% CashBack",R.drawable.ic_bill_green));
+
+
+        offerListOnline.add(new OfferModel(
+                "Bill Payment", "25% CashBack",R.drawable.ic_bill_green));
+        offerListOnline.add(new OfferModel(
+                "Bill Payment", "25% CashBack",R.drawable.ic_bill_green));
+
+        OfferAdapter offerAdapter = new OfferAdapter(offerList, context);
+
+        offerRecycler.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                addBottomDots(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (count <= 5){
+                            viewPager.setCurrentItem(count);
+                            count++;
+                        }
+                        else {
+                            count = 0;
+                            viewPager.setCurrentItem(count);
+                        }
+                    }
+                });
+            }
+        },500,200);
 
         return view;
     }
